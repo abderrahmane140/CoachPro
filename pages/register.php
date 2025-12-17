@@ -14,7 +14,7 @@
       Create an account
     </h2>
 
-    <form action="" method="POST" class="space-y-6">
+    <form action="../func/auth.php" method="POST" class="space-y-6">
 
       <!-- Username -->
       <div>
@@ -83,7 +83,7 @@
                    focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
           >
             <option value="">Select role</option>
-            <option value="athlete">Athlete</option>
+            <option value="atlethe">Athlete</option>
             <option value="coach">Coach</option>
           </select>
         </div>
@@ -93,6 +93,7 @@
       <div>
         <button
           type="submit"
+          name="register"
           class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-2
                  text-sm font-semibold text-white hover:bg-indigo-400
                  focus:outline-none focus:ring-2 focus:ring-indigo-500"
