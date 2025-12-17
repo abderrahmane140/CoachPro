@@ -37,7 +37,40 @@ if($_SERVER["REQUEST_METHOD"]  === 'POST' && isset($_POST['register'])) {
             $stmt->bindParam(':role', $role);
             $stmt->execute();
 
+
+            header('Location: /CoachPro/pages/coach/dashboard.php');
         }
+    }
+}
+
+//handle the login
+
+
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])){
+
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    if(empty($email) || empty($password)){
+        $errors[] = 'Both feild are required!';
+    }else{
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch();
+
+        if($user && password_verify($password, $user['password'])){
+            session_start();
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+
+
+            header('Location: /CoachPro/pages/coach/dashboard.php');
+            exit();
+         }else{
+            $errors[] = "Invalid email or passowrd!";
+         }
     }
 }
 
