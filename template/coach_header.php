@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +34,6 @@
     <!-- Footer (Optional, can add more links here) -->
     <div class="mt-auto px-4 py-6">
       <a href="../../pages/coach/profile.php" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Profile</a>
-      <a href="" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Sign Out</a>
+      <a href="../../func/logout.php" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Sign Out</a>
     </div>
   </div>
