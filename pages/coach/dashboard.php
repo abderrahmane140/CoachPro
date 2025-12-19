@@ -1,4 +1,14 @@
-<?php include '../../template/coach_header.php' ?>
+<?php
+session_start();
+
+require_once '../../func/auth_middleware.php';
+
+include '../../template/coach_header.php';
+
+
+checkAuth();
+checkRole(['coach']);
+?>
   
   <!-- Main Content -->
   <div class="flex-1 bg-gray-900 px-6 py-8">

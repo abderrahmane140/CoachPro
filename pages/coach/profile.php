@@ -1,6 +1,11 @@
 <?php 
 session_start();
-require '../../config/dbConnection.php';    
+require '../../config/dbConnection.php'; 
+require_once '../../func/auth_middleware.php';
+
+
+checkAuth();
+checkRole(['coach']);   
 
 if(!isset($_SESSION['user_id'])) {
     header("Location: /CoachPro/pages/login.php");
