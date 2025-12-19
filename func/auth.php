@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require '../config/dbConnection.php';
 
 //handle the register 
@@ -26,21 +26,32 @@ if($_SERVER["REQUEST_METHOD"]  === 'POST' && isset($_POST['register'])) {
             $errors[] = "Email is already registered!";
         }
 
-
-        if(empty($errors)) {
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-            $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password , :role)");
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $hashedPassword);
-            $stmt->bindParam(':role', $role);
-            $stmt->execute();
-
-
-            header('Location: /CoachPro/pages/coach/dashboard.php');
-        }
     }
+
+    if(!empty($errors)){
+        $_SESSION['errors'] = $errors;
+        header('Location: /CoachPro/pages/register.php');
+        exit();
+    }
+
+
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password , :role)");
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $hashedPassword);
+    $stmt->bindParam(':role', $role);
+    $stmt->execute();
+
+
+    if ($role === 'coach'){
+        header('Location: /CoachPro/pages/coach/dashboard.php');
+    }else{
+        header('Location: /CoachPro/pages/athlete/index.php');
+    }
+    exit();       
+
 }
 
 //handle the login
@@ -59,19 +70,30 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])){
         $stmt->execute();
         $user = $stmt->fetch();
 
-        if($user && password_verify($password, $user['password'])){
-            session_start();
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
-
-
-            header('Location: /CoachPro/pages/coach/dashboard.php');
-            exit();
-         }else{
+        
+        if(!$user || !password_verify($password, $user['password'])) {
             $errors[] = "Invalid email or passowrd!";
-         }
+        }
+
     }
+
+        if (!empty($errors)){
+            $_SESSION['errors'] = $errors;
+            header('Location: /CoachPro/pages/login.php');
+            exit();
+        }
+
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = $user['role'];
+
+
+        if($user['role'] === 'coach'){
+            header('Location: /CoachPro/pages/coach/dashboard.php');
+        }else{
+            header('Location: /CoachPro/pages/athlete/index.php');
+        }
+        exit();
 }
 
 ?>

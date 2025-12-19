@@ -10,6 +10,18 @@
 <body class="min-h-screen flex items-center justify-center bg-gray-100">
 
   <div class="w-full max-w-sm bg-white p-8 rounded-lg shadow-md">
+    <?php
+    session_start();
+    if(!empty($_SESSION['errors'])) :
+    ?>
+    <div class="mb-4 rounded-md bg-red-100 border border-red-400 p-3 text-sm text-red-700">
+      <ul class="list-disc pl-5">
+        <?php foreach ($_SESSION['errors'] as $error): ?>
+          <li><?= htmlspecialchars($error) ?></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+    <?php unset($_SESSION['errors']); endif;?>
     <h2 class="text-center text-2xl font-bold mb-8 text-gray-800">
       Login to your account
     </h2>
@@ -64,8 +76,10 @@
           Sign in
         </button>
       </div>
-
     </form>
+    <div class="mt-3 text-center text-gray-600 hover:text-gray-400">
+      <a class="" href="/CoachPro/pages/register.php">Create a acount</a>
+    </div>
   </div>
 
 </body>
