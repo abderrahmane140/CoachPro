@@ -18,10 +18,27 @@ $coach_id = $_SESSION['user_id'];
 
 //get all the booking
 
-$stmt  = $pdo->prepare('SELECT * FROM bookings WHERE coach_id = :coach_id');
+// $stmt  = $pdo->prepare('SELECT * FROM bookings WHERE coach_id = :coach_id');
+$stmt  = $pdo->prepare("
+    SELECT 
+      u.username AS athlete_name,
+
+      a.date_avb,
+      a.start_time,
+      a.end_time,
+
+      b.id AS id,
+      b.status,
+      b.created_at
+    FROM bookings b
+    JOIN users u ON b.athlete_id = u.id
+    JOIN availabilities a ON b.availability_id = a.id
+    WHERE b.coach_id = :coach_id
+");
 $stmt->bindParam(':coach_id',$coach_id);
 $stmt->execute();
 $bookings= $stmt->fetchAll();
+// var_dump($bookings);
 
 
 //update the status 
@@ -75,9 +92,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         <thead class="bg-gray-700 text-gray-200">
             <tr>
                 <th class="px-4 py-3 text-left">#</th>
-                <th class="px-4 py-3 text-left">Athlete ID</th>
-                <th class="px-4 py-3 text-left">Coach ID</th>
-                <th class="px-4 py-3 text-left">Availability ID</th>
+                <th class="px-4 py-3 text-left">Athlete</th>
+                <th class="px-4 py-3 text-left">date</th>
+                <th class="px-4 py-3 text-left">start time</th>
+                <th class="px-4 py-3 text-left">end time</th>
                 <th class="px-4 py-3 text-left">Status</th>
                 <th class="px-4 py-3 text-left">Created At</th>
                 <th class="px-4 py-3 text-left">Action</th>
@@ -89,9 +107,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <?php foreach ($bookings as $index => $booking) : ?>
                     <tr class="border-t border-gray-700 hover:bg-gray-700/50 transition">
                         <td class="px-4 py-3"><?= $index + 1 ?></td>
-                        <td class="px-4 py-3"><?= $booking['athlete_id'] ?></td>
-                        <td class="px-4 py-3"><?= $booking['coach_id'] ?></td>
-                        <td class="px-4 py-3"><?= $booking['availability_id'] ?></td>
+                        <td class="px-4 py-3"><?= $booking['athlete_name'] ?></td>
+                        <td class="px-4 py-3"><?= $booking['date_avb'] ?></td>
+                        <td class="px-4 py-3"><?= $booking['start_time'] ?></td>
+                        <td class="px-4 py-3"><?= $booking['end_time'] ?></td>
+
 
                         <td class="px-4 py-3">
                             <span class="
