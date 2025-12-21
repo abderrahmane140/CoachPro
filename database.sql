@@ -5,7 +5,7 @@ CREATE TABLE users (
     username varchar(50) not null,
     email varchar(60) not null UNIQUE,
     password varchar(255) not null,
-    role ENUM('atlethe','coach') not null,
+    role ENUM('athlete','coach') not null,
     created_at datetime DEFAULT CURRENT_TIMESTAMP,
     updated_at datetime DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP
 );

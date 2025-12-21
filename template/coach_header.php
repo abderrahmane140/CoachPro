@@ -1,4 +1,8 @@
+<?php 
 
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,15 +29,15 @@
       </div>
 
       <!-- Sidebar Links -->
-      <a href="#" class="block px-3 py-2 rounded-md text-sm font-medium bg-gray-950/50 text-white">Dashboard</a>
-      <a href="../../pages/coach/availability.php" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Availability</a>
-      <a href="../../pages/coach/bookings.php" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Bookings</a>
+      <a href="/CoachPro/pages/coach/dashboard.php" class="block px-3 py-2 rounded-md text-sm font-medium bg-gray-950/50 text-white">Dashboard</a>
+      <a href="/CoachPro/pages/coach/availability.php" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Availability</a>
+      <a href="/CoachPro/pages/coach/bookings.php" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Bookings</a>
 
     </div>
 
     <!-- Footer (Optional, can add more links here) -->
     <div class="mt-auto px-4 py-6">
-      <a href="../../pages/coach/profile.php" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Profile</a>
-      <a href="../../func/logout.php" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Sign Out</a>
+      <a href="/CoachPro/pages/coach/profile.php" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Profile</a>
+      <a href="/CoachPro/func/logout.php" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Sign Out</a>
     </div>
   </div>
